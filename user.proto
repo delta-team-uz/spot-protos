@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+message User {
+    string id = 1;
+    string name = 2;
+    string second_name = 3;
+    string email = 4;
+    string password = 5;
+    string role = 6;
+    string created_at = 7;
+    string updated_at = 8;
+    string deleted_at = 9;
+}
+
+message Artist {
+    string id = 1;
+    string name = 2;
+    string second_name = 3;
+    string password = 4;
+    string email = 5;
+    string created_at = 6;
+    string updated_at = 7;
+    string deleted_at = 8;
+}
+
+message Music {
+    string id = 1;
+    string name = 2;
+    string category_id = 3;
+    string artist_id = 4;
+    string minio_url = 5;
+    string created_at = 6;
+    string updated_at = 7;
+    string deleted_at = 8;
+}
+
+message GetOneRequest {
+    string id = 1;
+}
+
+message GetAllRequest {
+    int64 limit = 1;
+    int64 offset = 2;
+}
+
+message GetAllUsersResponse {
+    User users = 1;
+}
+
+message GetAllArtistsResponse {
+    Artist artists = 1;
+}
+
+message GetAllMusicsResponse {
+    Music musics = 1;
+}
+
+service UserService {
+    rpc CreateUser(User) returns (User);
+    rpc UpdateUser(User) returns (User);
+    rpc GetOneUser(GetOneRequest) returns (User);
+    rpc GetAllUsers(GetAllRequest) returns (GetAllUsersResponse); 
+    rpc DeleteUser(GetOneRequest) returns (User);
+
+    rpc CreateArtist(Artist) returns (Artist);
+    rpc UpdateArtist(Artist) returns (Artist);
+    rpc GetOneArtist(GetOneRequest) returns (Artist);
+    rpc GetAllArtists(GetAllRequest) returns (GetAllArtistsResponse);
+    rpc DeleteArtist(GetOneRequest) returns (Artist);
+
+    rpc CreateMusic(Music) returns (Music);
+    rpc UpdateMusic(Music) returns (Music);
+    rpc GetOneMusic(GetOneRequest) returns (Music);
+    rpc GetAllMusics(GetAllRequest) returns (GetAllMusicsResponse);
+    rpc DeleteMusic(GetOneRequest)returns (Music);
+}
